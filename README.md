@@ -1,70 +1,83 @@
-# GFLUX
+<p align="center"><img src="gflux/img/banner.png" alt="GFLUX" width="520"></p>
 
-A beginner-friendly circuit builder for ESP32 projects. Place real hobby modules on a rounded grid, connect them with jumper wires, export to KiCad, and generate the Arduino code.
+!# GFLUX
+GFLUX is a beginner-friendly circuit builder for Basic board projects. Drop real popular modules into a grid, connect them with wires (or make us do it)
+GFLUX checks the wiring as you go. It shows current moving through each wire and turns your circuit into KiCad files.
 
-## Run it
+Big thanks to Kicad, this project was designed to be a more begginer friendly version as part of a UCF Hackathon!
 
-Open `index.html` in a browser. Everything except the AI chat and KiCad's PDF/Gerber output works offline, with no install.
+## Get started - Hello Judges!
 
-To have KiCad generate the PDF, SVG and Gerber files, install [KiCad](https://www.kicad.org/download/) (7 or newer) and run:
+1. Download **GFLUX-Windows.exe** from **[Releases → GFLUX (latest build)](https://github.com/BlakeWMcleod/Cy-Ramick-The-sentient-plate-KnightHack-2026/releases/tag/gflux-latest)**. macOS and Linux builds are on the same page.
+2. Double-click it. GFLUX opens in your browser.
+3.It should Find or Install Kicad if you don't own it
 
-```bash
-python3 tools/kicad_bridge.py      # then open http://localhost:8765
-```
+Keep the small window open while you work.
 
-The bridge uses only the Python standard library. It serves the site and runs `kicad-cli` for the **Schematic** and **PCB** buttons. When the bridge is connected, a green **KiCad** badge appears in the top bar.
+Opening `gflux/index.html` Does **NOT** Work as intended, sorry hackers
 
-## Using it
+## Using GFLUX
 
-| Action | How |
+| To… |  |
 | --- | --- |
-| Add a part | Open **Library** on the left, then click a part or drag it onto the grid |
-| See a part's full name and buy link | Hover over its name tag |
-| Wire | Drag from one pin to another. Click a pin, then click empty grid to add bends |
-| Rotate / delete | Select, then press <kbd>R</kbd> / <kbd>Del</kbd> (or use the buttons at top right) |
-| Wire colour | Pick a swatch before wiring, or select a wire and pick a swatch. **Auto** colours by role (black GND, red 3V3, orange 5V, blue SDA, yellow SCL) |
+| Add a part | Open **Library** on the right, then click a part or drag it onto the grid |
+| See a part's full name and where to buy it | Hover over its name tag |
+| Wire a part automatically | Click the **Power** next to its name. Power, ground and the right ESP32 pins are wired for you |
+| Wire by hand | Drag from one pin to another. Let go on empty grid to leave the end loose, or click a pin and then click the grid to add bends |
+| Rotate / delete | Select, then press <kbd>R</kbd> / <kbd>Del</kbd>, or use the tools on the left |
 | Undo / redo | <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> |
-| Save / load | **Save** downloads a `.gflux.json` file and **Load** opens one. Work is also autosaved in the browser |
+| Copy / paste | <kbd>Ctrl</kbd>+<kbd>C</kbd> / <kbd>Ctrl</kbd>+<kbd>V</kbd> (<kbd>Ctrl</kbd>+<kbd>D</kbd> duplicates) |
+| Save / open | **File** menu. Work also autosaves in your browser |
+| Finilise | Checks your work to find any Errors |
 
 ### Safe wiring
 
-While you drag a wire, the screen dims and every pin is marked:
+Wiring an LED straight to a GPIO or a supply automatically adds a 220 Ω resistor. You can turn that off in the **Wire color** menu.
+This program should detect short circuits, but may not supply step up converters
 
-- **Green:** a good match (power to a supply, ground to ground, signal to a GPIO, default I2C pins)
-- **Blue:** works
-- **Yellow:** works, but be careful (strapping pins, input-only pins, powering a module from a GPIO)
-- **Red dashed:** blocked, because it would short a supply to GND, join two supplies, tie a GPIO to power, or put 5 V on a 3.3 V-only part
+- **Signal pins:** crimson red, orange, yellow, green, blue, indigo and violet 
+- **Power:** red
+- **Ground:** black
 
-### Flow animation
+### KiCad
 
-With **Flow** on, moving dashes show which way current runs:
+The **KiCad** menu offers:
 
-- **Yellow dashes:** power leaving a supply
-- **White dashes:** current returning to ground
-- **Blue pulses:** signals going between the ESP32 and each module
+- **Create schematic:** a `.kicad_sch` file, plus a PDF when KiCad is connected
+- **Create PCB:** a `.kicad_pcb` file with every module placed where it is on the canvas (1 grid square = 2.54 mm), plus Gerbers, drill files and a PDF when KiCad is connected
+- **Download KiCad project:** a `.zip` with the project, schematic, board and generated `.ino` sketch
+- **Check again / Locate / Install:** ask the app to find KiCad, point it at your install, or install KiCad for you
 
-### KiCad export
+### Code and Arduino IDE
 
-- **Schematic:** downloads a `.kicad_sch` that KiCad 7 or newer can open. Pins with the same label are connected.
-- **PCB:** downloads a `.kicad_pcb` with footprints placed where they are on the canvas (1 grid = 2.54 mm) and a ratsnest for every connection.
-- **KiCad project:** downloads a `.zip` with the project, schematic, board and the generated `.ino` sketch.
+- **Code panel** (right side): an editor for your ESP32 sketch, with four example projects and starter code. Simple mistakes show up as you type; click one to jump to its line. **Check with Arduino** runs the real Arduino compiler. Drag the panel's left edge to resize it.
+- **Arduino IDE menu:** check the code, open the sketch in the Arduino IDE, download it as `.ino`, or let GFLUX set up Arduino and ESP32 support.
+- The lights on the **KiCad** and **Arduino IDE** tabs turn green when each one is connected, and red when it isn't.
 
-### Code AI
 
-The left panel can write ESP32 Arduino code for your circuit.
+## Parts library
+ 50 modules you can buy on Amazon, each with a plain name and its real pinout:
 
-- **Starter code** works offline. It generates a sketch that uses the GPIO pins you actually wired.
-- For free-form requests ("beep when something is closer than 10 cm"), add an [Anthropic API key](https://console.anthropic.com/settings/keys) under **AI settings**. The key stays in your browser, and requests go straight to Anthropic.
+- **Boards:** ESP32 DevKit V1, ESP32-C3 SuperMini
+- **Basics:** resistor, push button, slide switch, knob
+- **Lights:** LED, RGB LED, LED ring and strip, LED grid
+- **Sensors:** distance (ultrasonic and laser), temperature and humidity, weather, motion, light, sound, soil, gas, tilt, line, magnet, heart rate, weight, GPS
+- **Input:** touch, joystick, clicky knob, keypad, IR remote, RFID
+- **Screens:** OLED, 16×2 LCD, 4-digit display
+- **Motors:** servo, DC motor and driver, stepper, relay, vibration
+- **Sound & storage:** buzzer, speaker and amp, MP3 player, SD card, clock module
+- **Power:** battery pack, charger, regulator, breadboard supply
+-**More**
+You can also add your own parts from the bottom of the library, please note if creating a G pin it connect to ground and not to green.
 
-## Files
+## For developers
 
-| File | What it does |
-| --- | --- |
-| `js/parts.js` | Parts library: about 50 Amazon-available modules with real pinouts, beginner names and code snippets |
-| `js/netlist.js` | Circuit model: pin positions, nets, reference designators |
-| `js/rules.js` | Wiring safety checks and current-flow directions |
-| `js/art.js` | Artwork for each module |
-| `js/app.js` | Editor: canvas, wire routing, library, top bar |
-| `js/kicad.js` | KiCad schematic, PCB, project and ZIP writers |
-| `js/codegen.js`, `js/assistant.js` | Starter-code generator and AI assistant |
-| `tools/kicad_bridge.py` | Local server that drives `kicad-cli` |
+GFLUX is plain HTML, CSS and JavaScript with no build step. The desktop app is a small Python program.
+
+```bash
+python3 gflux/tools/gflux_app.py         # run the app from source
+pip install pyinstaller pillow
+python gflux/tools/build_app.py          # build the app (GFLUX.exe on Windows)
+python3 -m unittest discover gflux/tools/tests -v
+```
+
