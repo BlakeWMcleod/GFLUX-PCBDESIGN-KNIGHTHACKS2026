@@ -1,7 +1,8 @@
 <p align="center"><img src="gflux/img/banner.png" alt="GFLUX" width="520"></p>
 
-!# GFLUX
-GFLUX is a beginner-friendly circuit builder for Basic board projects. Drop real popular modules into a grid, connect them with wires (or make us do it)
+# GFLUX
+
+GFLUX is a beginner-friendly circuit builder for Basic board projects. Drop popular modules from amazon into a grid, connect them with wires (or make us do it), make a KiCad file!
 GFLUX checks the wiring as you go. It shows current moving through each wire and turns your circuit into KiCad files.
 
 Big thanks to Kicad, this project was designed to be a more begginer friendly version as part of a UCF Hackathon!
@@ -32,8 +33,7 @@ Opening `gflux/index.html` Does **NOT** Work as intended, sorry hackers
 
 ### Safe wiring
 
-Wiring an LED straight to a GPIO or a supply automatically adds a 220 Ω resistor. You can turn that off in the **Wire color** menu.
-This program should detect short circuits, but may not supply step up converters
+This program should detect short circuits, but doesnt do step up converters
 
 - **Signal pins:** crimson red, orange, yellow, green, blue, indigo and violet 
 - **Power:** red
@@ -71,8 +71,8 @@ The **KiCad** menu offers:
 You can also add your own parts from the bottom of the library, please note if creating a G pin it connect to ground and not to green.
 
 ## For developers
-
-GFLUX is plain HTML, CSS and JavaScript with no build step. The desktop app is a small Python program.
+Good luck XD
+GFLUX is plain HTML, CSS and JavaScript with no build step. 
 
 ```bash
 python3 gflux/tools/gflux_app.py         # run the app from source
