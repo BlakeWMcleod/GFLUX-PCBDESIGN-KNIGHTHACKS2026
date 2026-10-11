@@ -2,7 +2,7 @@
 
 # GFLUX
 
-GFLUX is a beginner-friendly circuit builder for Basic board projects. Drop popular modules from amazon into a grid, connect them with wires (or make us do it), make a KiCad file!
+GFLUX, or Gridflux is a beginner-friendly circuit builder for Basic board projects. Drop popular modules from amazon into a grid, connect them with wires (or make us do it), make a KiCad file!
 GFLUX checks the wiring as you go. It shows current moving through each wire and turns your circuit into KiCad files.
 
 Big thanks to Kicad, this project was designed to be a more begginer friendly version as part of a UCF Hackathon!
