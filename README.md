@@ -1,4 +1,4 @@
-<p align="center"><img src="gflux/img/banner.png" alt="GFLUX" width="520"></p>
+<p align="center"><img src="gflux/img/demo.gif" alt="GFLUX demo" width="520"></p>
 
 # GFLUX
 
