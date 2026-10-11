@@ -9,7 +9,7 @@ Big thanks to Kicad, this project was designed to be a more begginer friendly ve
 
 ## Get started - Hello Judges!
 
-1. Download **GFLUX-Windows.exe** from **[Releases → GFLUX (latest build)](https://github.com/BlakeWMcleod/Cy-Ramick-The-sentient-plate-KnightHack-2026/releases/tag/gflux-latest)**. macOS and Linux builds are on the same page.
+1. Download **GFLUX-Windows.exe** from releases on THE RIGHT **HAND SIZE**.
 2. Double-click it. GFLUX opens in your browser.
 3.It should Find or Install Kicad if you don't own it
 
